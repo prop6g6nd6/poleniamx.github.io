@@ -8,6 +8,18 @@
 <body>
     <h1>Hello, World!</h1>
     <p>Welcome to my first webpage!</p>
+    <label for="datePicker">Select a Date:</label>
+	<input type="date" id="datePicker" name="datePicker">
+
+	<script>
+        document.getElementById('datePicker').addEventListener('change', function() {
+            const selectedDate = this.value;
+            console.log('Selected date:', selectedDate);
+        });
+    </script>
+    
 </body>
+
+
 </html>
 
