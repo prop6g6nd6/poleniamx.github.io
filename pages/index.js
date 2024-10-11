@@ -1,12 +1,11 @@
 import React from 'react';
+import EmailInput from '../components/EmailInput'; // Import the EmailInput component
 
-const Home = () => {
-  return (
-    <div>
-      <h1>Welcome to My Next.js App!</h1>
-      <p>This is a simple Next.js application.</p>
-    </div>
-  );
-};
-
-export default Home;
+export default function Home() {
+    return (
+        <div className="flex flex-col items-center justify-center min-h-screen">
+            <h1 className="text-2xl font-bold mb-4">Subscribe to Polenia's newsletter</h1>
+            <EmailInput />
+        </div>
+    );
+}
