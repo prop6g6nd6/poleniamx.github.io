@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 import { db } from '../utils/firebase'; 
 import { collection, addDoc, query, where, getDocs } from "firebase/firestore"; 
 import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"; // Import Card components from ShadCN
+
+
 
 const EmailInput = () => {
   const [email, setEmail] = useState("");
@@ -40,26 +43,34 @@ const EmailInput = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <div className="bg-white p-6 rounded-md shadow-md">
-        <form onSubmit={handleSubmit} className="flex flex-col items-center">
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="border rounded-md p-2 mb-4"
-            placeholder="Enter your email"
-          />
-          <Button 
-          type="submit" 
-          >
-            Subscribe
-          </Button>
-        </form>
-        {message && (
-          <p style={{ color: error ? "red" : "green" }} className="mt-2">{message}</p>
-        )}
-      </div>
+      <Card className="w-full max-w-md p-6 shadow-lg">
+        <CardHeader>
+          <h2 className="text-xl font-semibold text-center">Subscribe to our Newsletter</h2>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="flex flex-col items-center">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="border rounded-md p-2 mb-4 w-full"
+              placeholder="Enter your email"
+            />
+            <Button 
+              type="submit" 
+              className="w-full"
+            >
+              Subscribe
+            </Button>
+          </form>
+        </CardContent>
+        <CardFooter>
+          {message && (
+            <p style={{ color: error ? "red" : "green" }} className="mt-2 text-center">{message}</p>
+          )}
+        </CardFooter>
+      </Card>
     </div>
   );
 };
