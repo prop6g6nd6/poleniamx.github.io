@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { db } from '../utils/firebase';
 import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card"; // Import Card components from ShadCN
 import { Input } from "@/components/ui/input";
 
 const EmailInput = () => {
@@ -41,35 +40,24 @@ const EmailInput = () => {
   };
 
   return (
-    <div className="flex flex-col items-center w-full">
-      <Card className="w-full p-6 shadow-lg">
-        <CardHeader>
-          <h2 className="text-xl font-semibold text-center">Subscribe to our Newsletter</h2>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="flex flex-col items-center">
-            <Input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              placeholder="Enter your email"
-              className="mb-4"
-            />
-            <Button 
-              type="submit" 
-              className="w-full"
-            >
-              Subscribe
-            </Button>
-          </form>
-        </CardContent>
-        <CardFooter>
-          {message && (
-            <p style={{ color: error ? "red" : "green" }} className="mt-2 text-center">{message}</p>
-          )}
-        </CardFooter>
-      </Card>
+    <div className="flex flex-col items-center">
+      <h2 className="text-xl font-semibold text-center">Subscribe to our Newsletter</h2>
+      <form onSubmit={handleSubmit} className="flex flex-col items-center w-full max-w-md p-4">
+        <Input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          placeholder="Enter your email"
+          className="mb-4"
+        />
+        <Button type="submit" className="w-full">
+          Subscribe
+        </Button>
+        {message && (
+          <p style={{ color: error ? "red" : "green" }} className="mt-2 text-center">{message}</p>
+        )}
+      </form>
     </div>
   );
 };
