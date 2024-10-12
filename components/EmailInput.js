@@ -1,11 +1,10 @@
 // components/EmailInput.js
-import React, { useState } from 'react'; 
-import { db } from '../utils/firebase'; 
-import { collection, addDoc, query, where, getDocs } from "firebase/firestore"; 
+import React, { useState } from 'react';
+import { db } from '../utils/firebase';
+import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"; // Import Card components from ShadCN
-
-
+import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card"; // Import Card components from ShadCN
+import { Input } from "@/components/ui/input";
 
 const EmailInput = () => {
   const [email, setEmail] = useState("");
@@ -42,20 +41,20 @@ const EmailInput = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <Card className="w-full max-w-md p-6 shadow-lg">
+    <div className="flex flex-col items-center w-full">
+      <Card className="w-full p-6 shadow-lg">
         <CardHeader>
           <h2 className="text-xl font-semibold text-center">Subscribe to our Newsletter</h2>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="flex flex-col items-center">
-            <input
+            <Input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="border rounded-md p-2 mb-4 w-full"
               placeholder="Enter your email"
+              className="mb-4"
             />
             <Button 
               type="submit" 
