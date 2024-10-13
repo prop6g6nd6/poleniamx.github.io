@@ -4,6 +4,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import EmailInput from '../components/EmailInput';
 import { Dialog, DialogOverlay, DialogContent } from '../components/ui/dialog';
+import { Button } from "@/components/ui/button";
 
 const user = {
   name: 'Tom Cook',
@@ -12,10 +13,10 @@ const user = {
 };
 
 const navigation = [
-  { name: 'Home', href: '#', current: true },
-  { name: 'About', href: '#', current: false },
-  { name: 'Contact', href: '#', current: false },
-  { name: 'Shop', href: '#', current: false },
+  { name: 'Inicio', href: '#', current: true },
+  { name: 'Acerca de', href: '#', current: false },
+  { name: 'Contacto', href: '#', current: false },
+  { name: 'Tienda', href: '#', current: false },
   // Add more links as needed
 ];
 
@@ -30,8 +31,8 @@ const LandingPage = () => {
     <div className="min-h-full">
       {/* Navigation Bar */}
       <Disclosure as="nav" className="bg-gray-800">
-        <div className="px-2 sm:px-6 lg:px-8"> {/* Adjusted padding */}
-          <div className="flex h-16 items-center justify-start"> {/* Changed to justify-start */}
+        <div className="max-w-full px-12 sm:px-12 lg:px-16">
+          <div className="flex h-20 sm:h-24 md:h-24 items-center justify-start"> {/* Responsive height classes */}
             {/* Logo */}
             <div className="flex items-center">
               <div className="flex-shrink-0">
@@ -62,52 +63,77 @@ const LandingPage = () => {
               </div>
             </div>
 
-            {/* Notification and Profile Section */}
-            <div className="hidden md:block ml-auto">
-              <div className="ml-4 flex items-center md:ml-6">
-                <button
-                  type="button"
-                  className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon aria-hidden="true" className="h-6 w-6" />
-                </button>
+           {/* Notification and Profile Section */}
+<div className="hidden md:block ml-auto">
+  <div className="flex items-center md:ml-6">
+   {/* Search Bar */}
+{/* Search Bar */}
+<div className="relative mx-4">
+  <input
+    type="text"
+    placeholder="Buscar..."
+    className="bg-gray-700 text-white rounded-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
+    style={{ fontFamily: 'Manrope, sans-serif' }}
+  />
+  <img
+    src="search-svgrepo-com.svg" // Adjust the path to your SVG icon
+    alt="Search Icon"
+    className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400"
+  />
+</div>
 
-                {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-3">
-                  <div>
-                    <MenuButton className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                      <span className="absolute -inset-1.5" />
-                      <span className="sr-only">Open user menu</span>
-                      <img alt="" src={user.imageUrl} className="h-8 w-8 rounded-full" />
-                    </MenuButton>
-                  </div>
-                  <MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none">
-                    <MenuItem>
-                      {({ active }) => (
-                        <a
-                          href="#"
-                          className={`block px-4 py-2 text-sm ${active ? 'bg-gray-100' : 'text-gray-700'}`}
-                        >
-                          Your Profile
-                        </a>
-                      )}
-                    </MenuItem>
-                    <MenuItem>
-                      {({ active }) => (
-                        <a
-                          href="#"
-                          className={`block px-4 py-2 text-sm ${active ? 'bg-gray-100' : 'text-gray-700'}`}
-                        >
-                          Sign out
-                        </a>
-                      )}
-                    </MenuItem>
-                  </MenuItems>
-                </Menu>
-              </div>
-            </div>
+
+
+    {/* Shopping Cart Button */}
+<button
+  type="button"
+  className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+>
+  <span className="absolute -inset-1.5" />
+  <span className="sr-only">View cart</span>
+  <img
+    src="/cart.svg"  // Path to your cart SVG in the public folder
+    alt="Shopping Cart Icon"
+    className="h-6 w-6"
+  />
+</button>
+
+
+    {/* Profile Dropdown */}
+    <Menu as="div" className="relative ml-3">
+      <div>
+        <MenuButton className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+          <span className="absolute -inset-1.5" />
+          <span className="sr-only">Open user menu</span>
+          <img alt="" src={user.imageUrl} className="h-8 w-8 rounded-full object-cover" />
+        </MenuButton>
+      </div>
+      <MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none">
+        <MenuItem>
+          {({ active }) => (
+            <a
+              href="#"
+              className={`block px-4 py-2 text-sm ${active ? 'bg-gray-100' : 'text-gray-700'}`}
+            >
+              Your Profile
+            </a>
+          )}
+        </MenuItem>
+        <MenuItem>
+          {({ active }) => (
+            <a
+              href="#"
+              className={`block px-4 py-2 text-sm ${active ? 'bg-gray-100' : 'text-gray-700'}`}
+            >
+              Sign out
+            </a>
+          )}
+        </MenuItem>
+      </MenuItems>
+    </Menu>
+  </div>
+</div>
+
 
             <div className="-mr-2 flex md:hidden">
               {/* Mobile menu button */}
@@ -121,61 +147,69 @@ const LandingPage = () => {
           </div>
         </div>
 
-        <DisclosurePanel className="md:hidden">
-          <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-            {navigation.map((item) => (
-              <DisclosureButton
-                key={item.name}
-                as="a"
-                href={item.href}
-                aria-current={item.current ? 'page' : undefined}
-                className={classNames(
-                  item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                  'block rounded-md px-3 py-2 text-base font-medium'
-                )}
-              >
-                {item.name}
-              </DisclosureButton>
-            ))}
-          </div>
-        </DisclosurePanel>
-      </Disclosure>
+  <DisclosurePanel className="md:hidden">
+    <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
+      {navigation.map((item) => (
+        <DisclosureButton
+          key={item.name}
+          as="a"
+          href={item.href}
+          aria-current={item.current ? 'page' : undefined}
+          className={classNames(
+            item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+            'block rounded-md px-3 py-2 text-base font-medium'
+          )}
+        >
+          {item.name}
+        </DisclosureButton>
+      ))}
+    </div>
+  </DisclosurePanel>
+</Disclosure>
 
-      <header className="bg-white shadow">
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold mb-4" style={{ fontFamily: 'Bricolage Grotesque, sans-serif' }}>
-            Dashboard
-          </h1>
-        </div>
-      </header>
 
-      <main>
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          {/* Your content */}
-          <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-            <h1 className="text-4xl font-bold mb-4" style={{ fontFamily: 'Bricolage Grotesque, sans-serif' }}>
-              Welcome to Polenia!
-            </h1>
-            <button
-              className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-              style={{ fontFamily: 'Bricolage Grotesque, sans-serif' }}
-              onClick={() => setOpen(true)}
-            >
-              Subscribe
-            </button>
-          </div>
-        </div>
-      </main>
+<header className="bg-white shadow">
+  <div className="max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <h1 className="text-4xl font-bold mb-4" style={{ fontFamily: 'Manrope, sans-serif' }}>
+      Dashboard
+    </h1>
+  </div>
+</header>
 
-      {/* Dialog for Email Input */}
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogOverlay className="fixed inset-0 bg-black/30" />
-        <DialogContent>
-          <div className="flex justify-center">
-            <EmailInput />
-          </div>
-        </DialogContent>
-      </Dialog>
+<main className="bg-gray-50 min-h-screen flex items-center justify-center">
+  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    {/* Centered Content Container */}
+    <div className="flex flex-col items-center justify-center text-center p-8 bg-white shadow-lg rounded-lg transition-all duration-300 hover:shadow-xl">
+      <h1 className="text-4xl font-bold mb-4" style={{ fontFamily: 'Bricolage Grotesque, sans-serif' }}>
+        ¡Bienvenido al sitio de Polenia!
+      </h1>
+      <p className="mb-6 text-gray-600" style={{ fontFamily: 'Manrope, sans-serif' }}>
+        Unete a nuestra comunidad para experimentar los sabores unicos de Polenia
+      </p>
+      <Button
+      
+        style={{ fontFamily: 'Manrope, sans-serif' }}
+        onClick={() => setOpen(true)}
+      >
+        Suscribete
+      </Button>
+    </div>
+  </div>
+</main>
+
+
+      
+
+     {/* Dialog for Email Input */}
+<Dialog open={open} onOpenChange={setOpen}>
+  <DialogOverlay className="fixed inset-0 bg-black/30" />
+  <DialogContent className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg"> {/* Adjust max-w and add padding */}
+    <div className="flex justify-center">
+      <EmailInput />
+    </div>
+  </DialogContent>
+</Dialog>
+
     </div>
   );
 };
