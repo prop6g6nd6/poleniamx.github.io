@@ -1,5 +1,5 @@
 import React from 'react';
-import LandingPage from '../components/LandingPage'; // Import the LandingPage component
+import LandingPage from './LandingPage'; // Import the LandingPage component
 
 const Home = () => {
   return <LandingPage />;

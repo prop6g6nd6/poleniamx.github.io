@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
-import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/react';
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import EmailInput from '../components/EmailInput';
-import { Dialog, DialogOverlay, DialogContent } from '../components/ui/dialog';
-import { Button } from "@/components/ui/button";
-import Link from 'next/link';
+import { Disclosure, DisclosureButton, Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/router';
 
 const user = {
@@ -17,7 +13,7 @@ const navigation = [
   { name: 'Inicio', href: '/', current: false },
   { name: 'Acerca de', href: '/about', current: false },
   { name: 'Contacto', href: '#', current: false },
-  { name: 'Tienda', href: '#', current: false },
+  { name: 'Tienda', href: '/shop', current: false },
 ];
 
 function classNames(...classes) {
@@ -169,7 +165,7 @@ const Layout = ({ children }) => {
       </Disclosure>
 
       {/* Page content */}
-      <main>{children}</main>
+      <main className="mt-8">{children}</main>
     </div>
   );
 };
