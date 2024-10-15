@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Disclosure, DisclosureButton, Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/router';
+import { useCart } from '/context/cartContext'; // Import useCart to access the cart state
 
 const user = {
   name: 'Tom Cook',
@@ -22,6 +23,12 @@ function classNames(...classes) {
 
 const Layout = ({ children }) => {
   const router = useRouter();
+  const { state } = useCart(); // Access cart state
+
+  // Function to handle cart button click
+  const handleCartClick = () => {
+    router.push('/cart'); // Navigate to the cart page
+  };
 
   return (
     <div className="min-h-full">
@@ -65,7 +72,6 @@ const Layout = ({ children }) => {
             <div className="hidden md:block ml-auto">
               <div className="flex items-center md:ml-6">
                 {/* Search Bar */}
-                {/* Search Bar */}
                 <div className="relative mx-4">
                   <input
                     type="text"
@@ -80,22 +86,26 @@ const Layout = ({ children }) => {
                   />
                 </div>
 
-
-
-                {/* Shopping Cart Button */}
-                <button
-                  type="button"
-                  className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">View cart</span>
-                  <img
-                    src="/cart.svg"  // Path to your cart SVG in the public folder
-                    alt="Shopping Cart Icon"
-                    className="h-6 w-6"
-                  />
-                </button>
-
+   {/* Shopping Cart Button */}
+   <button
+              type="button"
+              onClick={handleCartClick} // Use handleCartClick to navigate to the cart page
+              className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+            >
+              <span className="absolute -inset-1.5" />
+              <span className="sr-only">View cart</span>
+              <img
+                src="/cart.svg" // Path to your cart SVG in the public folder
+                alt="Shopping Cart Icon"
+                className="h-6 w-6"
+              />
+              {/* Display the number of items in the cart */}
+              {state.items.length > 0 && (
+                <span className="absolute -top-1 -right-1 rounded-full bg-red-500 text-white text-xs px-1">
+                  {state.items.length}
+                </span>
+              )}
+            </button>
 
                 {/* Profile Dropdown */}
                 <Menu as="div" className="relative ml-3">
