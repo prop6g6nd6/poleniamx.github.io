@@ -1,7 +1,7 @@
 // utils/firebase.js
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { getAnalytics } from "firebase/analytics"; // Keep this import
+import { getFirestore, collection, getDocs } from "firebase/firestore"; // Add collection and getDocs
+import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAsHvWoe4vIiv1FpAhT4nVp1adxYTWYnr4",
@@ -19,7 +19,20 @@ const db = getFirestore(app);
 
 // Initialize Analytics only on the client-side
 if (typeof window !== "undefined") {
-    getAnalytics(app); // Call it directly without assigning it to a variable
+    getAnalytics(app); 
 }
+
+// Function to retrieve products from Firestore
+export const getProducts = async () => {
+    const productsCollection = collection(db, 'productos'); // Access 'productos' collection
+    const productSnapshot = await getDocs(productsCollection);
+    
+    const products = productSnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+    }));
+
+    return products; // Returns an array of product objects
+};
 
 export { db };

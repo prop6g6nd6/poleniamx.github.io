@@ -18,25 +18,43 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Image from "next/image";
-import { useCart } from '../context/cartContext'; // Import the useCart hook
+import { useDispatch } from 'react-redux'; // Import useDispatch from react-redux
+import { addItem, addOrder } from '../store/cartSlice'; // Import your Redux actions
 
-export default function ProductCard({ productName, description, price, imageUrl }) {
+// Add id prop to accept product id passed from shop.js
+export default function ProductCard({ id, productName, description, price, imageUrl }) {
   const [isOpen, setIsOpen] = useState(false); // State to control the drawer
-  const { dispatch } = useCart(); // Get the dispatch function from the cart context
+  const dispatch = useDispatch(); // Get the dispatch function from Redux
 
   const handleOpen = () => setIsOpen(true);
   const handleClose = () => setIsOpen(false);
 
-  // Function to handle adding the product to the cart
+  // Function to handle adding the product to the cart and creating an order
   const handleAddToCart = () => {
     const product = {
-      id: Date.now(), // Generate a unique ID for the product
+      id, // Use the id passed from Firebase
       productName,
       description,
       price,
       imageUrl,
     };
-    dispatch({ type: 'ADD_ITEM', payload: product }); // Dispatch the action to add the product
+
+    // Create the order object
+    const order = {
+      id: Date.now(), // Generate a unique order ID
+      items: [{ // Array to hold the items in this order
+        id, // Product ID
+        productName,
+        price,
+      }],
+      total: price, // Set total to the price of this order
+      date: new Date().toISOString(), // Store the current date
+    };
+
+    // Dispatch actions to add the item to the cart and the order to orders
+    dispatch(addItem(product)); // Dispatch the addItem action
+    dispatch(addOrder(order)); // Dispatch the addOrder action
+    
     handleClose(); // Close the drawer after adding
   };
 
